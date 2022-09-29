@@ -28,9 +28,14 @@ function create(req, res) {
 function show(req, res) {
   Waffle.findById(req.params.id)
   .populate('owner')
+  .populate('toppings')
   .then(waffle => {
-    res.render('waffles/show', {
-      waffle
+    Topping.find({_id: {$nin: waffle.toppings}})
+    .then(toppingsNotOnWaffle => {
+      res.render('waffles/show', {
+        waffle,
+        toppingsNotOnWaffle
+      })
     })
   })
 }
@@ -42,10 +47,26 @@ function deleteWaffle(req, res) {
   })
 }
 
+function addTopping(req, res) {
+  // Find the waffle
+  Waffle.findById(req.params.id)
+  .then(waffle => {
+    // Push the id of the topping into the toppings array of objectIds
+    waffle.toppings.push(req.body.toppingId)
+    waffle.save()
+    .then(savedWaffle => {
+      // Redirect back to show view for waffle
+      res.redirect(`/waffles/${savedWaffle._id}`)
+    })
+
+  })
+}
+
 export {
   create,
   newWaffle as new,
   index,
   show,
-  deleteWaffle as delete
+  deleteWaffle as delete,
+  addTopping
 }

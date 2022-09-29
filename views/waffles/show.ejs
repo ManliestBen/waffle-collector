@@ -2,8 +2,21 @@
 <%- include('../partials/nav') %>
 
 <h1><%= waffle.description %></h1>
-<h3>a <%= waffle.owner.name %> creation </h3>
+<h3>a <%= waffle.owner.name %> creation</h3>
+<h3>Topped with:</h3>
+<% waffle.toppings.forEach(topping => { %>
+  <p><%= topping.name %></p>
+<% }) %>
 <% if (user.profile._id.equals(waffle.owner._id)) { %>
+  <h2>Add Toppings</h2>
+  <form action="/waffles/<%= waffle._id %>/toppings" method="POST">
+    <select name="toppingId">
+      <% toppingsNotOnWaffle.forEach(topping => { %>
+        <option value="<%= topping._id %>"><%= topping.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add topping</button>
+  </form>
   <form action="/waffles/<%= waffle._id %>?_method=DELETE" method="POST">
     <button type="submit">Delete waffle</button>
   </form>
