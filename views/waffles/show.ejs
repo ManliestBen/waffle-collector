@@ -3,6 +3,12 @@
 
 <h1><%= waffle.description %></h1>
 <h3>a <%= waffle.owner.name %> creation </h3>
+<% if (user.profile._id.equals(waffle.owner._id)) { %>
+  <form action="/waffles/<%= waffle._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete waffle</button>
+  </form>
+<% } %>
+
 
 
 <%- include('../partials/footer') %>

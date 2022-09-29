@@ -7,6 +7,7 @@ router.get('/', isLoggedIn, wafflesCtrl.index)
 router.get('/new', isLoggedIn, wafflesCtrl.new)
 router.get('/:id', isLoggedIn, wafflesCtrl.show)
 router.post('/', isLoggedIn, wafflesCtrl.create)
+router.delete('/:id', isLoggedIn, wafflesCtrl.delete)
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next()

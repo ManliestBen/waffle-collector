@@ -35,9 +35,17 @@ function show(req, res) {
   })
 }
 
+function deleteWaffle(req, res) {
+  Waffle.findByIdAndDelete(req.params.id)
+  .then(waffle => {
+    res.redirect('/waffles')
+  })
+}
+
 export {
   create,
   newWaffle as new,
   index,
-  show
+  show,
+  deleteWaffle as delete
 }
