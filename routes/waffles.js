@@ -3,7 +3,9 @@ import * as wafflesCtrl from '../controllers/waffles.js'
 
 const router = Router()
 
+router.get('/', isLoggedIn, wafflesCtrl.index)
 router.get('/new', isLoggedIn, wafflesCtrl.new)
+router.get('/:id', isLoggedIn, wafflesCtrl.show)
 router.post('/', isLoggedIn, wafflesCtrl.create)
 
 function isLoggedIn(req, res, next) {

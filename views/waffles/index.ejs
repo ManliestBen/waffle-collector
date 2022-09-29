@@ -1,0 +1,9 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<h1>Dem Waffles:</h1>
+<% waffles.forEach(waffle => { %>
+  <h3><a href="/waffles/<%= waffle._id %>"><%= waffle.description %></a> (by <%= waffle.owner.name %>)</h3>
+<% }) %>
+
+<%- include('../partials/footer') %>
