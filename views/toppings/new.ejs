@@ -1,0 +1,11 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<h1>Add a topping</h1>
+
+<form action="/toppings" autocomplete="off" method="POST">
+  <input type="text" name="name" placeholder="Topping name">
+  <button type="submit">Submit topping</button>
+</form>
+
+<%- include('../partials/footer') %>
